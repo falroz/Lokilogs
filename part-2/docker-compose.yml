@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  logapp:
+    container_name: logapp
+    image: decima/logapp:latest 
+    networks: ["metrics_default"]
+
+networks: 
+  metrics_default: 
+    external: true
