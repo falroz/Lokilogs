@@ -4,11 +4,11 @@
 
 ### Questions
 
-1. Qu’est ce que Loki ?
+#### 1. Qu’est ce que Loki ?
 
 Loki est un système d'agregation de log inspiré de promtheus. Ce produit est développé par Grafana Labs et s’appuie sur leur produit éponyme pour l’affichage des logs. L’une des principales informations à savoir sur Loki est que seules les métadonnées de vos logs sont indexées. C’est ce qui le différencie d’Elasticsearch et qui lui permet aussi de consommer moins de ressources que ce dernier. 
 
-2. Quelles sont **les différentes composantes** de la stack **Loki** fournie ?
+#### 2. Quelles sont **les différentes composantes** de la stack **Loki** fournie ?
 
 Les fichiers : 
 - docker-compose.yml
@@ -23,7 +23,7 @@ Les différentes composantes :
 - gateway
 - flog
 
-3. À quoi servent **chacune des composantes** ?
+#### 3. À quoi servent **chacune des composantes** ?
 
 Les différentes composantes : 
 - read
@@ -39,15 +39,15 @@ Les différentes composantes :
 - flog
     - générateur de faux logs
 
-4. Qu’est-ce que Minio ? 
+#### 4. Qu’est-ce que Minio ? 
 
 MinIO offre un stockage d'objets hautes performances compatible S3. Natif de Kubernetes, MinIO est la seule suite de stockage d'objets disponible sur chaque cloud public, chaque distribution Kubernetes, le cloud privé et la périphérie. MinIO est défini par logiciel et est 100% open source sous GNU AGPL v3.
 
-5. **Réalisez un schéma** (à mettre dans le dossier partie1 du repo) du flux de données entre le moment où un log est écrit dans docker jusqu’au moment où il est visible dans grafana.
+#### 5. **Réalisez un schéma** (à mettre dans le dossier partie1 du repo) du flux de données entre le moment où un log est écrit dans docker jusqu’au moment où il est visible dans grafana.
 
 ![Schéma](/assets/images/schéma.png)
 
-6. À quoi sert le service **gateway** ?
+#### 6. À quoi sert le service **gateway** ?
 
 Le service **gateway** :  pk ?
 
@@ -56,27 +56,41 @@ Le service **gateway** :  pk ?
 
 ### Questions 
 
-7. L’application a une structure de logs plutôt constante, quels champs sont contenus dans les logs ? Quelle données représentent-il?
+#### 7. L’application a une structure de logs plutôt constante, quels champs sont contenus dans les logs ? Quelle données représentent-il?
 
 Les champs contenus dans les logs :
+EVT: les différents événement (ajout d'un produit ou paiement)
+LEVEL: le niveau de log (info, warning, error)
+MSG: le message d'un log
+Time: l'horaire du log
+UUID: l'identifiant unique d'un log
 
 
-8. Qu’est-ce qui doit être configuré du coté de la stack loki pour récolter les logs ? 
+#### 8. Qu’est-ce qui doit être configuré du coté de la stack loki pour récolter les logs ? 
 
 Pour récolter les logs, ce qui doit être configuré du côté de la stack loki c'est 
 
-9. Dans l’onglet “explorer”, quelle requête permet d’avoir :
+#### 9. Dans l’onglet “explorer”, quelle requête permet d’avoir :
 
 A. le volume de logs par couleur
+```
+sum by(level) (count_over_time({container="logapp"} | json [$__range]))
 
-    sum by(level) (count_over_time({container="logapp"} | json [1h]))
+Option -> type: instant
+```
+![Dashboard](https://screenshot.anquetil.org/static/aypoq.png)
 
-B. Filtrer les resultats pour un utilisateur
+#### B. Filtrer les resultats pour un utilisateur
 
+a faire
 
-10. Créer un dashboard qui contiendra la part de paiements en succès et en échec
+#### 10. Créer un dashboard qui contiendra la part de paiements en succès et en échec
+```
+sum by(evt) (count_over_time({container="logapp"} | json | evt =~ `pay.+` | evt != `pay.secure` [$__range]))
 
-![Dashboard](/assets/images/dashboard.png)
+Option -> type: instant
+```
+![Dashboard](https://screenshot.anquetil.org/static/013lku.png)
 
 
 ## Partie 3 - Elasticsearch
@@ -85,11 +99,11 @@ B. Filtrer les resultats pour un utilisateur
 
 #### Questions 
 
-11. qu’est-ce qu’elasticsearch ? 
+#### 11. qu’est-ce qu’elasticsearch ? 
 
 Elasticsearch un logiciel utilisant Lucene pour l'indexation et la recherche de données. Il fournit un moteur de recherche distribué et multientité à travers une interface REST. C'est un logiciel écrit en Java distribué sous licence Elastic. Il est ouvert pour toutes les données (textuelles, numériques, géospatiales, structurées et non structurées).
 
-12. À quoi sert elasticsearch ? 
+#### 12. À quoi sert elasticsearch ? 
 
 Elasticsearch peut être employé dans différents cas d'utilisation : 
 * Recherche applicative
@@ -102,17 +116,17 @@ Elasticsearch peut être employé dans différents cas d'utilisation :
 * L'analyse de la sécurité
 * Analyse des données métier
 
-13. Qu’est ce que Kibana ? Sur quel port accéder à Kibana ?
+#### 13. Qu’est ce que Kibana ? Sur quel port accéder à Kibana ?
 
 Kibana est une application frontend gratuite et ouverte qui s'appuie sur la Suite Elastic. Elle permet de rechercher et de visualiser les données indexées dans Elasticsearch. 
 
 Pour accéder à Kibana, c'est par défaut le port 5601.
 
-14. Qu’est-ce qu’un index Elasticsearch ? 
+#### 14. Qu’est-ce qu’un index Elasticsearch ? 
 
 Un index Elasticsearch est une collecte de documents en lien les uns avec lea autres. Elasticsearch stocke des données sous forme de documents JSON.
 
-15. Qu’est-ce que Lucene ? Quel est son rapport avec Elasticsearch ? 
+#### 15. Qu’est-ce que Lucene ? Quel est son rapport avec Elasticsearch ? 
 
 Lucene est une bibliothèque open source écrite en Java qui permet d'indexer et de chercher du texte. Il est utilisé dans certains moteurs de recherche. C'est un projet de la fondation Apache mis à disposition sous licence Apache. Il est également disponible pour les langages Ruby, Perl, C++, PHP, C#, Python.
 
@@ -123,11 +137,11 @@ Elasticsearch est basé sur Lucene (couche basse généré par Lucene). il utili
 
 #### Questions
 
-16. Qu’est-ce que Filebeat ?
+#### 16. Qu’est-ce que Filebeat ?
 
 FileBeat est composé de modules pour des sources de données pour simplifier la collecte, l'analyse et les vues des formats de journaux d'entrées. Il utilise également le protocole de contrôle de flux lors de l'envoi de plusieurs données à Elasticsearch ou Logstash.
 
-17. Quels autres “beats” existent ?
+#### 17. Quels autres “beats” existent ?
 
 Les beats sont différentes applications que l’on installe sur des machines qui seront chargées de récupérer des logs et des informations et de les envoyer aux sorties compatibles.
 
