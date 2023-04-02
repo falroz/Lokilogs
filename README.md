@@ -82,7 +82,8 @@ Option -> type: instant
 
 #### B. Filtrer les resultats pour un utilisateur
 
-a faire
+Pour filtrer les résultats pour un utilisateur, il faut le faire a partir du label "uuid" dans les logs, qui correspond a l'id unique d'un utilisateur.
+![Requete](https://screenshot.anquetil.org/static/argbh9.png)
 
 #### 10. Créer un dashboard qui contiendra la part de paiements en succès et en échec
 ```
