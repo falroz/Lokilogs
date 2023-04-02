@@ -29,3 +29,7 @@ services:
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
     networks:
       - elastic
+
+networks:
+  elastic:
+    name: elastic
