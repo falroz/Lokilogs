@@ -78,11 +78,13 @@ sum by(level) (count_over_time({container="logapp"} | json [$__range]))
 
 Option -> type: instant
 ```
+
 ![Dashboard](https://screenshot.anquetil.org/static/aypoq.png)
 
 #### B. Filtrer les resultats pour un utilisateur
 
-Pour filtrer les résultats pour un utilisateur, il faut le faire a partir du label "uuid" dans les logs, qui correspond a l'id unique d'un utilisateur.
+Pour filtrer les résultats pour un utilisateur, il faut le faire a partir du label "uuid" dans les logs, qui correspond a l'id unique d'un utilisateur:
+
 ![Requete](https://screenshot.anquetil.org/static/argbh9.png)
 
 #### 10. Créer un dashboard qui contiendra la part de paiements en succès et en échec
@@ -91,6 +93,7 @@ sum by(evt) (count_over_time({container="logapp"} | json | evt =~ `pay.+` | evt 
 
 Option -> type: instant
 ```
+
 ![Dashboard](https://screenshot.anquetil.org/static/013lku.png)
 
 
