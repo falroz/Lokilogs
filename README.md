@@ -139,11 +139,16 @@ Les beats sont différentes applications que l’on installe sur des machines qu
 * Heartbeat qui va récupérer des données en faisant des tests de disponibilité des services.
 
 
-## 3. Dashboard
-
-### Partie 4 - retour d’expérience
+### 3. Dashboard
 
 #### Question 
+
+Réalisez le même dashboard. Le dashboard devra être conservé sur Kibana et un lien vers celui-ci devra être rendu.
+Pour plus de sécurité vous pouvez exporter les informations du dashboard via management > stack Management > Kibana > Saved Object et les commit dans le repository
+
+## Partie 4 - retour d’expérience
+
+### Question 
 
 Quel est votre avis sur l’usage de Loki et d’Elasticsearch pour la collecte de logs ?
 
