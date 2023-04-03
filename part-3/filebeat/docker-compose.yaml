@@ -10,7 +10,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:    
       - ELASTICSEARCH_HOSTS=['http://elasticsearch:9200']
-      - ELASTICSEARCH_USERNAME=root
+      - ELASTICSEARCH_USERNAME=
       - ELASTICSEARCH_PASSWORD=
     command: ["--strict.perms=false"]
     networks:
