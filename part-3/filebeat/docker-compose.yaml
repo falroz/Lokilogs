@@ -8,11 +8,7 @@ services:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    environment:    
-      - ELASTICSEARCH_HOSTS=['http://elasticsearch:9200']
-      - ELASTICSEARCH_USERNAME=
-      - ELASTICSEARCH_PASSWORD=
-    command: ["--strict.perms=false"]
+    command: ['--strict.perms=false']
     networks:
       - elastic
 
