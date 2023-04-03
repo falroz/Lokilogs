@@ -17,5 +17,5 @@ output.elasticsearch:
   indices:
     - index: 'filebeat-%{[agent.version]}-%{+yyyy.MM.dd}'
 
-logging.json: false
+logging.json: true
 logging.metrics.enabled: false
