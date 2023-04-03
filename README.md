@@ -52,7 +52,7 @@ MinIO offre un stockage d'objets hautes performances compatible S3. Natif de Kub
 
 #### 6. À quoi sert le service **gateway** ?
 
-Le service **gateway** : pk ?
+Le service **gateway** : il permet de servir l'API de Loki
 
 ## Partie 2 - Logs
 
