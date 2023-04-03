@@ -1,22 +1,47 @@
-filebeat.config:
-  modules:
-    path: ${path.config}/modules.d/*.yml # enable all modules (nginx, kafka, redis, etc)
-    reload.enabled: false
+# filebeat.config:
+#   modules:
+#     path: ${path.config}/modules.d/*.yml # enable all modules (nginx, kafka, redis, etc)
+#     reload.enabled: false
 
-filebeat.autodiscover: # auto-discover tagged docker container
-  providers:
-    - type: docker
-      hints.enabled: true
+# filebeat.autodiscover: # auto-discover tagged docker container
+#   providers:
+#     - type: docker
+#       hints.enabled: true
 
-setup:
-  kibana.host: 'http://kibana:5601'
-  dashboards.enable: true
+# setup:
+#   kibana.host: 'http://kibana:5601'
+#   dashboards.enable: true
 
 # processors:
 # - add_cloud_metadata: ~ # for AWS, GCO, Azure etc.
 # - add_docker_metadata: ~ # add docker metadata (container id, name, image and labels)
 
-output.elasticsearch:  
-  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+# output.elasticsearch:
+#   hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+#   username: '${ELASTICSEARCH_USERNAME:}'
+#   password: '${ELASTICSEARCH_PASSWORD:}'
+
+filebeat.inputs:
+  - type: container
+    paths:
+      - '/var/lib/docker/containers/*/*.log'
+setup:
+  kibana.host: 'http://kibana:5601'
+  dashboards.enable: true
+
+processors:
+  - add_docker_metadata:
+      host: 'unix:///var/run/docker.sock'
+
+  - decode_json_fields:
+      fields: ['message']
+      target: 'json'
+      overwrite_keys: true
+
+output.elasticsearch:
+  hosts: ['elasticsearch:9200']
+  indices:
+    - index: 'filebeat-%{[agent.version]}-%{+yyyy.MM.dd}'
+
+logging.json: true
+logging.metrics.enabled: false
