@@ -1,5 +1,9 @@
 # Lokilogs M6
 
+Felipe Alarcon
+Julien Anquetil
+Léa Portier
+
 ## Partie 1 - Loki
 
 ### Questions
