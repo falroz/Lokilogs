@@ -166,8 +166,7 @@ Les beats sont différentes applications que l’on installe sur des machines qu
 
 #### Question
 
-Réalisez le même dashboard. Le dashboard devra être conservé sur Kibana et un lien vers celui-ci devra être rendu.
-Pour plus de sécurité vous pouvez exporter les informations du dashboard via management > stack Management > Kibana > Saved Object et les commit dans le repository
+![Schéma](/assets/images/dashboard1.png)
 
 ## Partie 4 - retour d’expérience
 
