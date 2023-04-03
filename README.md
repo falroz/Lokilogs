@@ -73,7 +73,12 @@ UUID: l'identifiant unique d'un log
 
 #### 8. Qu’est-ce qui doit être configuré du coté de la stack loki pour récolter les logs ?
 
-Pour récolter les logs, ce qui doit être configuré du côté de la stack loki c'est
+Pour récolter les logs, il faut configurer Minio afin de stocker les logs dans un serveur pour les streamer.
+il faut aussi configurer :
+- un service de lecture
+- un service d'écriture
+- promtail
+- gateway (nginx)
 
 #### 9. Dans l’onglet “explorer”, quelle requête permet d’avoir :
 
@@ -172,7 +177,11 @@ Les beats sont différentes applications que l’on installe sur des machines qu
 
 ### Question
 
-Quel est votre avis sur l’usage de Loki et d’Elasticsearch pour la collecte de logs ?
+#### Quel est votre avis sur l’usage de Loki et d’Elasticsearch pour la collecte de logs ?
+
+L'usage de loki et d'elk permet de centralier les logs d'une application afin de créer des visuels pour mieux comprendre ces logs.
+cela permet également de créer facilement des graphiques afin d'avoir des statistiques de son application.
+
 
 ## Sources
 
